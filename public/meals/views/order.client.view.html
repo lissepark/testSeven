@@ -1,0 +1,67 @@
+<section data-ng-controller="MealsController" data-ng-init="getOrderFromLocalStorage()">
+
+<h2 class="sub-header">Order</h2>
+
+<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<!--<th>#</th>-->
+					<th>
+						<button ng-click="order('name')">Name</button>
+         				<span class="sortorder" ng-show="predicate === 'name'" ng-class="{reverse:reverse}"></span>
+					</th>					
+					<th>
+						<button ng-click="order('price','number')">Price</button>
+         				<span class="sortorder" ng-show="predicate === 'price'" ng-class="{reverse:reverse}"></span>
+					</th>
+					<th>Count</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="mealorder in mealsToOrder | orderBy:predicate:reverse">
+					<!--<td>{{nameNumber}}</td>-->
+					<td data-ng-bind="mealorder.name"></td>
+					<td data-ng-bind="mealorder.price"></td>
+					<td>
+						<select name="nubexSelect">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+						</select>
+					</td>
+					<td>
+						<button type="button" class="btn btn-danger">Delete</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="textShowList">
+		<h3>Show the number in the list</h3>
+	</div>
+	<div class="btn-group">
+	  <button type="button" class="btn btn-primary">{{numPerPage}}</button>
+	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    <span class="caret"></span>
+	    <span class="sr-only">Toggle Dropdown</span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <li ng-click="numPerPage=20">20</li>
+	    <li ng-click="numPerPage=40">40</li>
+	    <li ng-click="numPerPage=60">60</li>
+	    <li ng-click="numPerPage=100">100</li>
+	  </ul>
+	</div>
+	<div class="clear"></div>
+
+	<uib-pagination total-items="users.length" ng-model="currentPage" max-size="maxSize" boundary-links="true" items-per-page="numPerPage"></uib-pagination>
+
+</section>

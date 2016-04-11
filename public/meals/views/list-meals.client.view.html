@@ -1,0 +1,96 @@
+<section data-ng-controller="MealsController" data-ng-init="find()">
+
+<div id="leftNav" class="table-responsive">
+<h2 class="sub-header">Meals</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<!--<th>#</th>-->
+				<th>
+					<button ng-click="order('name')">Name</button>
+         			<span class="sortorder" ng-show="predicate === 'name'" ng-class="{reverse:reverse}"></span>
+				</th>					
+				<th>
+					<button ng-click="order('price','number')">Price</button>
+         			<span class="sortorder" ng-show="predicate === 'price'" ng-class="{reverse:reverse}"></span>
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="meal in showMeals | orderBy:predicate:reverse">
+				<!--<td>{{nameNumber}}</td>-->
+				<td data-ng-bind="meal.name"></td>
+				<td data-ng-bind="meal.price"></td>
+				<td>
+					<button type="button" class="btn btn-warning" title="Add Meal" ng-click="addToOrder(meal)" >
+						Add to order
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div id="printSection">
+<div id="mainView" class="table-responsive">
+<h2 class="sub-header">Order</h2>
+	<table class="table table-striped">
+			<thead>
+				<tr>
+					<!--<th>#</th>-->
+					<th>Name</th>					
+					<th>Price</th>
+					<th>Qty</th>
+					<th>Amount</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="mealorder in mealsToOrder">
+					<!--<td>{{nameNumber}}</td>-->
+					<td data-ng-bind="mealorder.name"></td>
+					<td data-ng-bind="mealorder.price"></td>
+					<td data-ng-bind="mealorder.nubexSelect"></td>
+					<td >{{mealorder.itemTotal}}</td>
+					<td>
+						<button type="button" class="btn btn-danger" ng-click="delFromOrder(mealorder)">Delete</button>
+					</td>
+				</tr>
+			</tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td>Total</td>					
+					<td>{{totalPrice}}</td>					
+					<td>
+						<button type="button" class="btn btn-warning" ng-click="printIt()">Print</button>
+					</td>
+				</tr>
+	</table>
+</div>
+</div>
+
+<div class="clear"></div>
+	
+	<div class="textShowList">
+		<h3>Show the number in the list</h3>
+	</div>
+	<div class="btn-group">
+	  <button type="button" class="btn btn-primary">{{numPerPage}}</button>
+	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    <span class="caret"></span>
+	    <span class="sr-only">Toggle Dropdown</span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <li ng-click="numPerPage=20">20</li>
+	    <li ng-click="numPerPage=40">40</li>
+	    <li ng-click="numPerPage=60">60</li>
+	    <li ng-click="numPerPage=100">100</li>
+	  </ul>
+	</div>
+	<div class="clear"></div>
+
+	<uib-pagination total-items="users.length" ng-model="currentPage" max-size="maxSize" boundary-links="true" items-per-page="numPerPage"></uib-pagination>
+
+</section>

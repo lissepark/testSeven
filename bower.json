@@ -1,0 +1,15 @@
+{
+  "name": "testdigicode",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.2",
+    "angular-route": "~1.2",
+    "angular-resource": "~1.2",
+    "angular-sanitize": "~1.5.0",
+    "angular-bootstrap": "^1.2.5",
+    "angular-animate": "~1.5.0",
+    "angular-ui-scroll": "^1.3.3",
+    "angular-loading-bar": "^0.9.0",
+    "angular-local-storage": "last"
+  }
+}
